@@ -1,7 +1,8 @@
 import json
 import os
 from collections import defaultdict
-from gestion_libros import cargar_libros
+from gestion_libros import *
+import config
 
 def generar_reporte():
     libros = cargar_libros()
@@ -15,7 +16,7 @@ def generar_reporte():
 
         categorias[l["genero"]].append({
             "titulo": l["titulo"],
-            "autor": l["autor"],
+            "author": l["author"],
             "estado": estado
         })
 
@@ -26,16 +27,16 @@ def generar_reporte():
     for genero, lista in categorias.items():
         print(f"{genero}:")
         for libro in lista:
-            print(f"- {libro['titulo']} | {libro['autor']} | {libro['estado']}")
+            print(f"- {libro['titulo']} | {libro['author']} | {libro['estado']}")
 
         reporte.append({
             "categoria": genero,
             "libros": lista
         })
 
-    os.makedirs("data/reportes", exist_ok=True)
+    os.makedirs(config.ruta_absoluta/"data/reportes", exist_ok=True)
 
-    with open("data/reportes/reporte_libros.json", "w", encoding="utf-8") as f:
+    with open(config.ruta_absoluta/"data/reportes/reporte_libros.json", "w", encoding="utf-8") as f:
         json.dump(reporte, f, indent=4, ensure_ascii=False)
 
     input("\nPresione ENTER para continuar...")

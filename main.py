@@ -1,6 +1,6 @@
-from gestion_libros import registrar_libro, ver_inventario
-from buscar_libros import buscar_libro
-from prestamos import prestar_libro, devolver_libro
+from data import registrar_libro, ver_inventario
+from gestion_libros import buscar_libro # type: ignore
+from prestamos import prestar_libro, devolver_libro # type: ignore
 from reportes import generar_reporte
 
 def menu():
@@ -34,7 +34,7 @@ GESTOR DE INVENTARIO BIBLIOTECA
         elif opcion == "6":
             generar_reporte()
         elif opcion == "7":
-            print("👋 Saliendo...")
+            print(" Saliendo...")
             break
         else:
             print("Opción inválida.")
